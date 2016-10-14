@@ -1,0 +1,17 @@
+sudo: required
+
+language: c
+
+services:
+  - docker
+
+script: make test
+
+after_success:
+  - make build
+  - ${TRAVIS_BUILD_DIR}/bin/trigger-docker
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+    PHP_VERSION=`cat ${TRAVIS_BUILD_DIR}/php-version`;
+    docker login -u="${DOCKER_USER}" -p="${DOCKER_SECRET}";
+    docker push "${DOCKER_USER}/${DOCKER_REPO}:${PHP_VERSION}";
+    fi
