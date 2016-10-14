@@ -6,3 +6,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 #### Added
 - package files
+- support commands
+- test files
+- Makefile
+- Dockerfile
+- alpine-packages.md
+- php-version
