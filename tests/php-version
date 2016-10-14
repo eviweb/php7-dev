@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+libdir()
+{
+    echo "$(dirname "$(readlink -f "${BASH_SOURCE}")")/lib"
+}
+
+. "$(libdir)/support"
+
+build_test_image
+
+expect_output_contains "docker run --rm $(get_test_image) -v" "PHP 7"
